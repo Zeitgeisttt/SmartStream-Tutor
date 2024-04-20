@@ -15,5 +15,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;  // Adjust height as necessary
+  height: 100px;
+}
+
+.wrong-answer {
+  background-color: #ffcdd2; /* Light red for incorrect answers */
+}
+
+.correct-answer {
+  background-color: #c8e6c9; /* Light green for correct answers */
 }
