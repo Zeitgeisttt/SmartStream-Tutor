@@ -1,5 +1,4 @@
 // adding a new bookmark row to the popup
-import  { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
 const addNewBookmark = () => {};
 
@@ -22,30 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fetch current tab URL and extract video ID
   // document.documentElement.requestFullscreen();
   var form = document.getElementById('quiz');
+  var questionList = document.getElementById('questions');
   var questionTemplate = document.getElementById('question-template');
-
-  // hardcoded data
-  // var data = [
-  //   {
-  //     "question": "What is the name of the Sims 4 kit reviewed in the transcript?",
-  //     "choices": [
-  //       "A. Party Time Kit",
-  //       "B. Let's Get Festive Kit",
-  //       "C. Birthday Bash Kit",
-  //       "D. It is not mentioned in the transcript"
-  //     ],
-  //     "answer": 0
-  //   },
-  //   {
-  //     "question": "Does the reviewer recommend this kit?",
-  //     "choices": [
-  //       "A. Yes, especially for console players.",
-  //       "B. Yes, it is a great value.",
-  //       "C. No, she thinks it is overpriced and lacking in features.",
-  //       "D. No, but she recommends similar free custom content for PC players."
-  //     ],
-  //     "answer": 2
-  //   }]
+  var answer_list = [];
 
   function createQuestionElement(datum){
     var clone = questionTemplate.content.cloneNode(true);
@@ -79,9 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }, response => {
         if (response.status === 'success') {
             response.data.forEach(datum => {
-                questionList.appendChild(createQuestionElement(datum));
+              answer_list.push(datum.answer);
+              questionList.appendChild(createQuestionElement(datum));
             });
-            // console.log('success');
+            console.log(answer_list);
         } else {
             console.error('Error fetching data:', response.error);
         }
@@ -94,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
       
       form.addEventListener('submit', (e)=>{
         e.preventDefault();
-        console.log(form.value)
+        console.log(form.value);
       });
   });
 

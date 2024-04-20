@@ -1,0 +1,6 @@
+youtube_transcript_api
+google.generativeai
+streamlit
+python-dotenv
+Flask
+flask-cors
