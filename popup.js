@@ -11,10 +11,6 @@ const onDelete = e => {};
 const setBookmarkAttributes =  () => {};
 
 
-
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
   
 
@@ -23,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   var form = document.getElementById('quiz');
   var questionList = document.getElementById('questions');
   var questionTemplate = document.getElementById('question-template');
+  var loadingIndicator = document.getElementById('loading');
   var answer_list = [];
 
   function createQuestionElement(datum){
@@ -50,11 +47,13 @@ document.addEventListener("DOMContentLoaded", () => {
   
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     let currentPageUrl = tabs[0].url;  // Get the current page URL
+    loadingIndicator.style.display = 'flex'; // Show loading indicator
     // Send a message to the background script
     chrome.runtime.sendMessage({
         contentScriptQuery: "fetchUrl",
         url: currentPageUrl
     }, response => {
+        loadingIndicator.style.display = 'none'; // Hide loading indicator
         if (response.status === 'success') {
             response.data.forEach(datum => {
               answer_list.push(datum.answer);

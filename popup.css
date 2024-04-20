@@ -10,3 +10,10 @@
 .question {
   margin-bottom: 10px;
 }
+
+#loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;  // Adjust height as necessary
+}
