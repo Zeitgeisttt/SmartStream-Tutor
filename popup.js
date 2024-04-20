@@ -11,10 +11,6 @@ const onDelete = e => {};
 const setBookmarkAttributes =  () => {};
 
 
-
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
   
 
@@ -52,11 +48,13 @@ document.addEventListener("DOMContentLoaded", () => {
   
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     let currentPageUrl = tabs[0].url;  // Get the current page URL
+    loadingIndicator.style.display = 'flex'; // Show loading indicator
     // Send a message to the background script
     chrome.runtime.sendMessage({
         contentScriptQuery: "fetchUrl",
         url: currentPageUrl
     }, response => {
+        loadingIndicator.style.display = 'none'; // Hide loading indicator
         if (response.status === 'success') {
             response.data.forEach(datum => {
               answer_list.push(datum.choices[datum.answer]);
