@@ -1,5 +1,4 @@
 // adding a new bookmark row to the popup
-
 const addNewBookmark = () => {};
 
 const viewBookmarks = () => {};
