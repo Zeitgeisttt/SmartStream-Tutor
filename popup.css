@@ -1,8 +1,6 @@
-body {
-  width: 20rem; /* Set the body width to half of the viewport width */
-  overflow: hidden; /* Hide scrollbar if necessary */
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
+
+.content{
+  width: 20rem; /* Set the width to 20% of the viewport width */
 }
 
 .questions{

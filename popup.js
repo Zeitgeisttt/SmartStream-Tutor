@@ -1,4 +1,6 @@
 // adding a new bookmark row to the popup
+import  { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+
 const addNewBookmark = () => {};
 
 const viewBookmarks = () => {};
@@ -19,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Fetch current tab URL and extract video ID
   // document.documentElement.requestFullscreen();
-  var questionList = document.getElementById('questions');
+  var form = document.getElementById('quiz');
   var questionTemplate = document.getElementById('question-template');
 
   // hardcoded data
@@ -67,8 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     return questionElement;
   }
-
-  
   
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     let currentPageUrl = tabs[0].url;  // Get the current page URL
@@ -86,6 +86,16 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error('Error fetching data:', response.error);
         }
     });
+  
+    let submitBtn = document.createElement("input");
+      submitBtn.type = "submit";
+      submitBtn.value = "Submit";
+      form.appendChild(submitBtn);
+      
+      form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        console.log(form.value)
+      });
   });
 
 
