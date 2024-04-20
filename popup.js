@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Fetch current tab URL and extract video ID
   // document.documentElement.requestFullscreen();
-  var questionList = document.getElementById('questions');
+  var form = document.getElementById('quiz');
   var questionTemplate = document.getElementById('question-template');
 
   // hardcoded data
@@ -73,12 +73,26 @@ document.addEventListener("DOMContentLoaded", () => {
   chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
     let url = tabs[0].url;
     let videoId = getVideoId(url);
+    // Populate form when data is ready
     if (videoId){
       // chrome.tabs.sendMessage(tabs[0].id, { url: videoId, action: 'quiz' });
       // TODO: use videoId to get transcript then generate formated quiz
       data.forEach(datum => {
-        questionList.appendChild(createQuestionElement(datum));
+        form.appendChild(createQuestionElement(datum));
       });
+      // <input type="submit" value="Submit"></input>
+      let submitBtn = document.createElement("input");
+      submitBtn.type = "submit";
+      submitBtn.value = "Submit";
+      form.appendChild(submitBtn);
+      
+      form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        console.log(form.value)
+      });
+      
+    } else{
+      form.outerHTML = "<p>Loading ...</p>"
     }
     
   });

@@ -1,8 +1,18 @@
 body {
-  width: 20rem; /* Set the body width to half of the viewport width */
-  overflow: hidden; /* Hide scrollbar if necessary */
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
+  
+}
+
+.content{
+  width: 20vw; /* Set the width to 20% of the viewport width */
+    position: fixed; /* Fixed positioning */
+    top: 0; /* Stick to the top */
+    right: 0; /* Stick to the right */
+    background-color: #fff; /* Background color */
+    border: 1px solid #ccc; /* Border */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Box shadow */
+    z-index: 9999; /* Ensure it's on top of other content */
+    overflow-y: auto; /* Add vertical scrollbar if necessary */
+    max-height: 100vh; /* Set max height to full viewport height */
 }
 
 .questions{
