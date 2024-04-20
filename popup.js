@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
   var form = document.getElementById('quiz');
   var questionList = document.getElementById('questions');
   var questionTemplate = document.getElementById('question-template');
+  var loadingIndicator = document.getElementById('loading');
+  const resultsDisplay = document.getElementById('results');
   var answer_list = [];
 
   function createQuestionElement(datum){
@@ -57,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, response => {
         if (response.status === 'success') {
             response.data.forEach(datum => {
-              answer_list.push(datum.answer);
+              answer_list.push(datum.choices[datum.answer]);
               questionList.appendChild(createQuestionElement(datum));
             });
             console.log(answer_list);
@@ -66,16 +68,35 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
   
-    let submitBtn = document.createElement("input");
-      submitBtn.type = "submit";
-      submitBtn.value = "Submit";
-      form.appendChild(submitBtn);
+    // let submitBtn = document.createElement("input");
+    //   submitBtn.type = "submit";
+    //   submitBtn.value = "Submit";
+    //   form.appendChild(submitBtn);
       
-      form.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        console.log(form.value);
-      });
+    //   form.addEventListener('submit', (e)=>{
+    //     e.preventDefault();
+    //     console.log(form.value);
+    //   });
   });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let score = 0;
+    const questions = document.querySelectorAll('.question');
+    questions.forEach((question, index) => {
+        const selected = question.querySelector(`input[name="${question.querySelector('.question-text').textContent}"]:checked`);
+        // console.log(selected);
+        // console.log(selected.value);
+        // console.log(answer_list[index]);
+        if (selected && selected.value === answer_list[index]) {
+            score++;
+            
+        }
+    });
+    resultsDisplay.textContent = `You scored ${score} out of ${answer_list.length}`;
+    resultsDisplay.style.display = 'block';
+});
+
 
 
 });
