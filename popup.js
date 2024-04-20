@@ -1,6 +1,4 @@
 // adding a new bookmark row to the popup
-import  { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
-
 const addNewBookmark = () => {};
 
 const viewBookmarks = () => {};
@@ -70,16 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return questionElement;
   }
 
-  const API_KEY = "AIzaSyBDO5MDuzPtEyKqzYrlz0xrf3_2N5Mm-BU";
-  const genAI = new GoogleGenerativeAI(API_KEY);
-
-  async function generateQuiz(){
-    const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    console.log(result.response.text());
-  }
+  
   
   chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
     let url = tabs[0].url;
@@ -88,14 +77,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (videoId){
       // chrome.tabs.sendMessage(tabs[0].id, { url: videoId, action: 'quiz' });
       // TODO: use videoId to get transcript then generate formated quiz
-
-
-      generateQuiz();
-      
       data.forEach(datum => {
         form.appendChild(createQuestionElement(datum));
       });
 
+
+      
       // <input type="submit" value="Submit"></input>
       let submitBtn = document.createElement("input");
       submitBtn.type = "submit";
