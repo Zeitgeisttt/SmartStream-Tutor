@@ -70,27 +70,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   
   
-  chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-    let url = tabs[0].url;
-    fetch(`http://127.0.0.1:5000/get_data?url=${encodeURIComponent(currentPageUrl)}`)
-    .then(response => response.json())
-    .then(data => {
-        data.forEach(datum => {
-            questionList.appendChild(createQuestionElement(datum));
-        });
-    })
-    .catch(error => console.error('Error fetching data:', error));
-
-    // let videoId = getVideoId(url);
-    // if (videoId){
-    //   // chrome.tabs.sendMessage(tabs[0].id, { url: videoId, action: 'quiz' });
-    //   // TODO: use videoId to get transcript then generate formated quiz
-    //   data.forEach(datum => {
-    //     questionList.appendChild(createQuestionElement(datum));
-    //   });
-    // }
-    
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    let currentPageUrl = tabs[0].url;  // Get the current page URL
+    // Send a message to the background script
+    chrome.runtime.sendMessage({
+        contentScriptQuery: "fetchUrl",
+        url: currentPageUrl
+    }, response => {
+        if (response.status === 'success') {
+            response.data.forEach(datum => {
+                questionList.appendChild(createQuestionElement(datum));
+            });
+            // console.log('success');
+        } else {
+            console.error('Error fetching data:', response.error);
+        }
+    });
   });
+
 
 });
 
