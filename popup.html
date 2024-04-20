@@ -1,18 +1,31 @@
-<link href="popup.css" rel="stylesheet" type="text/css" />
-<script type="module" src="popup.js" defer></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz generator</title>
+    <link href="popup.css" rel="stylesheet" type="text/css" />
+    <script type="module" src="popup.js" defer></script>
+</head>
+<body>
+      <h1>Quiz Time</h1>
+      <div id="videoId"></div>
+      <div id="questions">
+        <template id="question-template">
+          <div class="question">
+              <p class="question-text"></p>
+              <div class="choices"></div>
+          </div>
+      </template>
 
-<div class="container">
-  <div>
-    <div class="title">Your bookmarks for this video</div>
-    <div id="videoId"></div>
-    <div id="questions">
-      <template id="question-template">
-        <div class="question">
-            <p class="question-text"></p>
-            <div class="choices"></div>
-        </div>
-    </template>
-    </div>
-    
+      
+
   </div>
-</div>
+
+</body>
+</html>
+
+
+
+
+
