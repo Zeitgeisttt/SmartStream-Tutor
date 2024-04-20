@@ -25,27 +25,27 @@ document.addEventListener("DOMContentLoaded", () => {
   var questionTemplate = document.getElementById('question-template');
 
   // hardcoded data
-  var data = [
-    {
-      "question": "What is the name of the Sims 4 kit reviewed in the transcript?",
-      "choices": [
-        "A. Party Time Kit",
-        "B. Let's Get Festive Kit",
-        "C. Birthday Bash Kit",
-        "D. It is not mentioned in the transcript"
-      ],
-      "answer": 0
-    },
-    {
-      "question": "Does the reviewer recommend this kit?",
-      "choices": [
-        "A. Yes, especially for console players.",
-        "B. Yes, it is a great value.",
-        "C. No, she thinks it is overpriced and lacking in features.",
-        "D. No, but she recommends similar free custom content for PC players."
-      ],
-      "answer": 2
-    }]
+  // var data = [
+  //   {
+  //     "question": "What is the name of the Sims 4 kit reviewed in the transcript?",
+  //     "choices": [
+  //       "A. Party Time Kit",
+  //       "B. Let's Get Festive Kit",
+  //       "C. Birthday Bash Kit",
+  //       "D. It is not mentioned in the transcript"
+  //     ],
+  //     "answer": 0
+  //   },
+  //   {
+  //     "question": "Does the reviewer recommend this kit?",
+  //     "choices": [
+  //       "A. Yes, especially for console players.",
+  //       "B. Yes, it is a great value.",
+  //       "C. No, she thinks it is overpriced and lacking in features.",
+  //       "D. No, but she recommends similar free custom content for PC players."
+  //     ],
+  //     "answer": 2
+  //   }]
 
   function createQuestionElement(datum){
     var clone = questionTemplate.content.cloneNode(true);
@@ -69,35 +69,25 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     return questionElement;
   }
-
-  const API_KEY = "AIzaSyBDO5MDuzPtEyKqzYrlz0xrf3_2N5Mm-BU";
-  const genAI = new GoogleGenerativeAI(API_KEY);
-
-  async function generateQuiz(){
-    const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    console.log(result.response.text());
-  }
   
-  chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-    let url = tabs[0].url;
-    let videoId = getVideoId(url);
-    // Populate form when data is ready
-    if (videoId){
-      // chrome.tabs.sendMessage(tabs[0].id, { url: videoId, action: 'quiz' });
-      // TODO: use videoId to get transcript then generate formated quiz
-
-
-      generateQuiz();
-      
-      data.forEach(datum => {
-        form.appendChild(createQuestionElement(datum));
-      });
-
-      // <input type="submit" value="Submit"></input>
-      let submitBtn = document.createElement("input");
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    let currentPageUrl = tabs[0].url;  // Get the current page URL
+    // Send a message to the background script
+    chrome.runtime.sendMessage({
+        contentScriptQuery: "fetchUrl",
+        url: currentPageUrl
+    }, response => {
+        if (response.status === 'success') {
+            response.data.forEach(datum => {
+                questionList.appendChild(createQuestionElement(datum));
+            });
+            // console.log('success');
+        } else {
+            console.error('Error fetching data:', response.error);
+        }
+    });
+  
+    let submitBtn = document.createElement("input");
       submitBtn.type = "submit";
       submitBtn.value = "Submit";
       form.appendChild(submitBtn);
@@ -106,12 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         console.log(form.value)
       });
-      
-    } else{
-      form.outerHTML = "<p>Loading ...</p>"
-    }
-    
   });
+
 
 });
 
