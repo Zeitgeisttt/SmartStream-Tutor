@@ -84,20 +84,26 @@ document.addEventListener("DOMContentLoaded", () => {
     let score = 0;
     const questions = document.querySelectorAll('.question');
     questions.forEach((question, index) => {
-        const selected = question.querySelector(`input[name="${question.querySelector('.question-text').textContent}"]:checked`);
-        // console.log(selected);
-        // console.log(selected.value);
-        // console.log(answer_list[index]);
-        if (selected && selected.value === answer_list[index]) {
-            score++;
-            
+      const choices = question.querySelectorAll('input[type="radio"]');
+      const selected = question.querySelector(`input[name="${question.querySelector('.question-text').textContent}"]:checked`);
+      
+      choices.forEach((choice) => {
+        const label = choice.parentNode;
+        if (selected && choice.value === selected.value && selected.value !== answer_list[index]) {
+          label.classList.add('wrong-answer');
         }
+        if (choice.value === answer_list[index]) {
+            label.classList.add('correct-answer'); // Highlight correct answer
+        }
+      });
+      
+      if (selected && selected.value === answer_list[index]) {
+          score++;
+      }
     });
     resultsDisplay.textContent = `You scored ${score} out of ${answer_list.length}`;
     resultsDisplay.style.display = 'block';
-});
-
-
+  });
 
 });
 
