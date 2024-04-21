@@ -1,12 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Ubuntu:wght@400;500&display=swap');
 
 .content{
-  width: 20rem; /* Set the width to 20% of the viewport width */
+  width: 25rem; /* Set the width to 20% of the viewport width */
+  font-family: "Ubuntu";
+  font-size: 1.1rem;
 }
 
-.questions{
-  display: flex;
+/* .question {
+  margin-bottom: 10px;
 }
+
+.question-text{
+  font-size: 1.2rem;
+  font-weight: 500;
+} */
 
 .question {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.question-text {
+  font-weight: bold;
   margin-bottom: 10px;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  column-gap: 5px;
+}
+
+.choices label {
+  margin-right: 15px;
+}
+
+input[type="radio"] {
+  margin-right: 5px;
+}
+
+.correct {
+  background-color: lightgreen;
 }
