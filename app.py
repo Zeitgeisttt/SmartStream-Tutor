@@ -6,9 +6,11 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import json
 import ast
+from urllib.parse import unquote
 
 app = Flask(__name__)
 CORS(app)
+CORS(app, resources={r"/*": {"origins": "chrome-extension://iemfjigamdmjafddeimcjfcgjlebangf"}})
 
 load_dotenv()
 
@@ -18,6 +20,9 @@ prompt = """Welcome, Video quiz generator! Your task is to generate a quiz from 
 
 def extract_transcript_details(youtube_video_url):
     try:
+        youtube_video_url = unquote(youtube_video_url)
+        if "youtube" not in youtube_video_url:
+            raise Exception("not a youtube url")
         video_id = youtube_video_url.split("=")[1]
         transcript_text = YouTubeTranscriptApi.get_transcript(video_id)
 
@@ -41,8 +46,6 @@ def generate_data_from_url(youtube_video_url):
 @app.route('/', methods=['GET'])
 def get_data():
     url = request.args.get('url', default=None, type=str)
-    if "youtube" not in url:
-        return
     data = generate_data_from_url(url)[7:-6]
     response = ast.literal_eval(data)
     return jsonify({"response": response})
