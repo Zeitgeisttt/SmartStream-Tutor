@@ -1,9 +1,11 @@
 # YouTutor
 Project for LA Hacks 2024.
-[Devpost]()
+[Devpost](https://devpost.com/software/yoututors)
 
 ## Description
 Have you ever taught yourself with online video lectures? Transform your learning experience with **_YouTutor_**! With this Google Chrome extension, you can study any Youtube video as if there is a class tutor by your side. Thanks to the power of Google's Gemini Pro GenerativeAI, YouTutor can create engaging quizzes tailored to the content you're watching. Explore interactive learning with a simple click!
+
+Target users: Students, Professors, Anyone in education
 
 ## Features
 - Extracts transcripts from YouTube videos.
@@ -19,8 +21,9 @@ Have you ever taught yourself with online video lectures? Transform your learnin
 5. Upload the Chrome Extension locally by clicking "Manage Extensions" and "Load unpacked". Select the root directory of this repository.
 6. Open any Youtube Video and click on the extension you just loaded. Wait for a few seconds and you get the quiz!
 
-## Screenshot
-<img src="https://github.com/Zeitgeisttt/YouTutor/assets/42275000/9a65f20c-8670-40ce-9d5a-e3e9d90ab1a6" width="650">  <img src="https://github.com/Zeitgeisttt/YouTutor/assets/42275000/d9e5e985-0441-45b9-a179-6e3588117be8" width="300">
+## Demo Usage Video
+[![video](http://img.youtube.com/vi/nBlDoAOwgBE/maxresdefault.jpg)](https://youtu.be/nBlDoAOwgBE)
+
 
 ### Dependencies
 `youtube_transcript_api`
@@ -30,8 +33,15 @@ Have you ever taught yourself with online video lectures? Transform your learnin
 `flask-cors`
 
 ### TODO:
-1. Pin the Chrome extension window
-2. Make use of timestamp (jump to the topic of question)
-3. More features such as summarize video, solution analysis
-4. More aesthetic UI
-5. No local server needed. Or no Python needed.
+1. UI:
+   - Pin the Chrome extension window
+   - Prettier UI
+   - More types of questions: T/F, multiple-answers, fill in blanks
+   - Integrate Math symbols (latex), audios into questions
+2. Scalability:
+   - Use of timestamp to be more interactive (pop-up quiz, jump to topic)
+   - More features such as summarize video, solution analysis
+   - More platforms and more formats of info such as articles, arxiv papers
+   - No local backend server needed, or no Python needed
+   - Visual-heavy or music-heavy videos such as bird recognition
+   - Allow user-uploaded datasets such as actual course materials and quizzes. Use RAG to have more accurate answers.
