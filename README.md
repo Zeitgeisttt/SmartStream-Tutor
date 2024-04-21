@@ -20,8 +20,7 @@ Have you ever taught yourself with online video lectures? Transform your learnin
 6. Open any Youtube Video and click on the extension you just loaded. Wait for a few seconds and you get the quiz!
 
 ## Screenshot
-<img src="https://github.com/Zeitgeisttt/SmartStream-Tutor/assets/42275000/d9e5e985-0441-45b9-a179-6e3588117be8" width="300">
-
+<img src="https://github.com/Zeitgeisttt/SmartStream-Tutor/assets/42275000/9a65f20c-8670-40ce-9d5a-e3e9d90ab1a6" width="650">  <img src="https://github.com/Zeitgeisttt/SmartStream-Tutor/assets/42275000/d9e5e985-0441-45b9-a179-6e3588117be8" width="300">
 
 ### Dependencies
 `youtube_transcript_api`
