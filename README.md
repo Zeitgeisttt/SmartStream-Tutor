@@ -1,9 +1,9 @@
-# SmartStream Tutor
+# YouTutor
 Project for LA Hacks 2024.
 [Devpost]()
 
 ## Description
-Have you ever taught yourself with online video lectures? Transform your learning experience with **_SmartStream Tutor_**! With this Google Chrome extension, you can study any Youtube video as if there is a class tutor by your side. Thanks to the power of Google's Gemini Pro GenerativeAI, SmartStream Tutor can create engaging quizzes tailored to the content you're watching. Explore interactive learning with a simple click!
+Have you ever taught yourself with online video lectures? Transform your learning experience with **_YouTutor_**! With this Google Chrome extension, you can study any Youtube video as if there is a class tutor by your side. Thanks to the power of Google's Gemini Pro GenerativeAI, YouTutor can create engaging quizzes tailored to the content you're watching. Explore interactive learning with a simple click!
 
 ## Features
 - Extracts transcripts from YouTube videos.
@@ -20,7 +20,7 @@ Have you ever taught yourself with online video lectures? Transform your learnin
 6. Open any Youtube Video and click on the extension you just loaded. Wait for a few seconds and you get the quiz!
 
 ## Screenshot
-<img src="https://github.com/Zeitgeisttt/SmartStream-Tutor/assets/42275000/9a65f20c-8670-40ce-9d5a-e3e9d90ab1a6" width="650">  <img src="https://github.com/Zeitgeisttt/SmartStream-Tutor/assets/42275000/d9e5e985-0441-45b9-a179-6e3588117be8" width="300">
+<img src="https://github.com/Zeitgeisttt/YouTutor/assets/42275000/9a65f20c-8670-40ce-9d5a-e3e9d90ab1a6" width="650">  <img src="https://github.com/Zeitgeisttt/YouTutor/assets/42275000/d9e5e985-0441-45b9-a179-6e3588117be8" width="300">
 
 ### Dependencies
 `youtube_transcript_api`
