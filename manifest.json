@@ -3,15 +3,13 @@
   "version": "0.1.0",
   "description": "Generate Quiz from YT videos",
   "permissions": [
-    "activeTab",
-    "*://127.0.0.1:5000/*"
+    "activeTab"
   ],
   "content_security_policy": {
-    "extension_pages": "script-src 'self' http://127.0.0.1:5000; object-src 'self'"
+    "extension_pages": "script-src 'self' http://127.0.0.1:5000; object-src 'self';"
   },
   "host_permissions": [
-    "https://*.youtube.com/*",
-    "*://127.0.0.1:5000/*"
+    "<all_urls>"
   ],
   "background": {
     "service_worker": "background.js"

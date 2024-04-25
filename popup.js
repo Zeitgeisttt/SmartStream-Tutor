@@ -54,12 +54,14 @@ document.addEventListener("DOMContentLoaded", () => {
         url: currentPageUrl
     }, response => {
         loadingIndicator.style.display = 'none'; // Hide loading indicator
+        console.log("response: " + response)
+        console.log(response)
         if (response.status === 'success') {
             response.data.forEach(datum => {
               answer_list.push(datum.choices[datum.answer]);
               questionList.appendChild(createQuestionElement(datum));
             });
-            console.log(answer_list);
+            // console.log(answer_list);
         } else {
             console.error('Error fetching data:', response.error);
         }
