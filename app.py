@@ -37,9 +37,15 @@ def extract_transcript_details(youtube_video_url):
 def generate_gemini_content(transcript, prompt):
     model = genai.GenerativeModel("gemini-1.5-pro-latest")
     response = model.generate_content(prompt + transcript)
-    return response.text
+    print("DEBUG - response: ")
+    # print(response)
+    # print(response.parts[0].text)
+    parsed_response = response.parts[0].text
+
+    return parsed_response
 
 def generate_data_from_url(youtube_video_url):
+    # print("url: %s" % (youtube_video_url))
     transcript = extract_transcript_details(youtube_video_url)
     return generate_gemini_content(transcript, prompt)
 
@@ -47,8 +53,10 @@ def generate_data_from_url(youtube_video_url):
 def get_data():
     url = request.args.get('url', default=None, type=str)
     data = generate_data_from_url(url)[7:-6]
+    print("url: %s\ndata: %s", (url, data))
     response = ast.literal_eval(data)
     return jsonify({"response": response})
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
